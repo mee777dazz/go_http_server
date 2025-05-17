@@ -1,0 +1,129 @@
+basePath: /
+definitions:
+  domain.Object:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  types.GetObjectHandlerResponse:
+    properties:
+      value:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server.
+  title: My API
+  version: "1.0"
+paths:
+  /object:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an object by its key
+      parameters:
+      - description: Key of the object
+        in: query
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Object deleted successfully
+          schema:
+            type: string
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "404":
+          description: Object not found
+          schema:
+            type: string
+      summary: Delete an object
+      tags:
+      - object
+    get:
+      consumes:
+      - application/json
+      description: Get an object by its key
+      parameters:
+      - description: Key of the object
+        in: query
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.GetObjectHandlerResponse'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "404":
+          description: Object not found
+          schema:
+            type: string
+      summary: Get an object
+      tags:
+      - object
+    post:
+      consumes:
+      - application/json
+      description: Create a new object with the specified key and value
+      parameters:
+      - description: Object data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Object'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Object created successfully
+          schema:
+            type: string
+        "400":
+          description: Bad request
+          schema:
+            type: string
+      summary: Create an object
+      tags:
+      - object
+    put:
+      consumes:
+      - application/json
+      description: Create or update an object with the specified key and value
+      parameters:
+      - description: Object data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Object'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Object created or updated successfully
+          schema:
+            type: string
+        "400":
+          description: Bad request
+          schema:
+            type: string
+      summary: Create or update an object
+      tags:
+      - object
+swagger: "2.0"
